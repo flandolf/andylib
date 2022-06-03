@@ -9,7 +9,7 @@ This library contains some functions to assist you in JS development.
 ![demo](https://dumpyy.gq/files/andylib/samplecode.svg)
 ## License
 
-GPLv3
+MIT License
 
 
 ## Tech Stack
