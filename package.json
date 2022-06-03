@@ -5,6 +5,7 @@
   "main": "index.js",
   "author": "Dumpy",
   "private": false,
+  "license": "MIT",
   "dependencies": {
     "colors": "^1.4.0",
     "request": "^2.88.2"
