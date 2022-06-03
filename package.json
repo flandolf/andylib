@@ -1,0 +1,12 @@
+{
+  "name": "@dumpy/andylib",
+  "version": "2.0.1",
+  "description": "Simple JS Library",
+  "main": "index.js",
+  "author": "Dumpy",
+  "private": false,
+  "dependencies": {
+    "colors": "^1.4.0",
+    "request": "^2.88.2"
+  }
+}
