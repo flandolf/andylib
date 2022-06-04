@@ -1,6 +1,6 @@
 {
   "name": "@dumpy/andylib",
-  "version": "3.0.0",
+  "version": "3.0.1",
   "description": "Simple JS Library",
   "main": "index.js",
   "author": "Dumpy",
