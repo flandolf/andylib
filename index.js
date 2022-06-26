@@ -5,8 +5,16 @@ const colors = require('colors');
 function hello() {
     log("Hello World", "info");
 }
-/* A function that takes in a url, headers, and a verbose flag. It returns a promise that will resolve
-if the request is successful and reject if it is not. */
+
+/**
+ * It takes a URL, a set of headers, and a verbose flag, and returns a promise that resolves to the
+ * body of the response.
+ * @param url - The URL to request
+ * @param [headers] - This is a JSON object that contains the headers that you want to send with the
+ * request.
+ * @param [verbose=false] - If true, will log the request and headers to the console.
+ * @returns A promise
+ */
 function get(url, headers = {}, verbose = false) {
     return new Promise(function (resolve, reject) {
         var request = require('request');
@@ -36,6 +44,14 @@ function get(url, headers = {}, verbose = false) {
 
     });
 }
+/**
+ * It takes a URL, headers, and body, and returns a promise that resolves to the response body
+ * @param url - The URL to post to
+ * @param [headers] - This is a JSON object that contains the headers for the request.
+ * @param [body] - The body of the request.
+ * @param [verbose=false] - If true, will log the request to the console.
+ * @returns A promise
+ */
 function post(url, headers = {}, body = "", verbose = false) {
     body = body.toString()
     return new Promise(function (resolve, reject) {
@@ -69,19 +85,68 @@ function post(url, headers = {}, body = "", verbose = false) {
 function log(msg, type = 'success') {
 
     var time = new Date().toLocaleTimeString().replace('AM', '').replace('PM', '');
+    time.replace('^[ \t]+')
     if (type == "error") {
-        console.log(("[ERROR] " + time + "| " + msg).red);
+        console.log(("[ERROR] " + time + " | " + msg).red);
     } else if (type == "info") {
-        console.log(("[INFO] " + time + "| " + msg).yellow);
+        console.log(("[INFO] " + time + " | " + msg).yellow);
     }
     else if (type == "success") {
-        console.log(("[LOG] " + time + "| " + msg).green);
+        console.log(("[LOG] " + time + " | " + msg).green);
     }
+}
+function logadv(msg, color = 'green', text = 'LOG') {
+    var time = new Date().toLocaleTimeString();
+    switch (color) {
+        case 'green':
+            console.log(("[" + text + "] " + time + " | " + msg).green);
+            break;
+        case 'red':
+            console.log(("[" + text + "] " + time + " | " + msg).red);
+            break;
+        case 'yellow':
+            console.log(("[" + text + "] " + time + " | " + msg).yellow);
+            break;
+        case 'blue':
+            console.log(("[" + text + "] " + time + " | " + msg).blue);
+            break;
+        case 'cyan':
+            console.log(("[" + text + "] " + time + " | " + msg).cyan);
+            break;
+    }
+}
+function pi(digits) {
+    let i = 1n;
+    let x = 3n * (10n ** 10020n);
+    let pi = x;
+    while (x > 0) {
+        x = x * i / ((i + 1n) * 4n);
+        pi += x / (i + 2n);
+        i += 2n;
+    }
+    var final = pi / (10n ** 20n);
+    final = final.toString()
+    // cut off final to the digits
+    final = final.substring(0, digits);
+    return final
+}
+function typew(text, speed=1) {
+    var i = 0;
+    var timer = setInterval(function () {
+        process.stdout.write(text[i]);
+        i++;
+        if (i >= text.length) {
+            clearInterval(timer);
+        } 
+    },  speed);
 }
 
 module.exports = {
     log,
     get,
     hello,
-    post
+    post,
+    logadv,
+    pi,
+    typew
 }
