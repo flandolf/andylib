@@ -1,4 +1,5 @@
 require('colors')
+const logger = require('./logger');
 const moment = require('moment');
 /**
  * It takes a URL, a set of headers, and a verbose flag, and returns a promise that resolves to the
@@ -102,25 +103,9 @@ function typew(text, speed=1) {
             clearInterval(timer);
         } 
     },  speed);
-    console.log()
+    
 }
 
-class logger {
-
-    info(text) {
-        console.log(`[INFO] | ${moment().format('hh:mm:ss')} | ${text} |`.green);
-    }
-    warn(text) {
-        console.log(`[WARN] | ${moment().format('hh:mm:ss')} | ${text} |`.yellow);
-    }
-    error(text) {
-        console.log(`[ERROR] | ${moment().format('hh:mm:ss')} | ${text} |`.red);
-    }
-    debug(text) {
-        console.log(`[DEBUG] | ${moment().format('hh:mm:ss')} | ${text} |`.blue);
-    }
-
-}
 
 module.exports = {
     get,
