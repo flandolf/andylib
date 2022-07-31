@@ -1,6 +1,6 @@
 require('colors')
 const logger = require('./logger');
-
+const time = require('./time');
 /**
  * It takes a URL, a set of headers, and a verbose flag, and returns a promise that resolves to the
  * body of the response.
@@ -112,5 +112,6 @@ module.exports = {
     post,
     pi,
     typew,
-    logger
+    logger,
+    time
 }
