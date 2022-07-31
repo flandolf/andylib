@@ -1,11 +1,5 @@
-const colors = require('colors');
-/**
- * `hello()` logs "Hello World" to the console
- */
-function hello() {
-    log("Hello World", "info");
-}
-
+require('colors')
+const moment = require('moment');
 /**
  * It takes a URL, a set of headers, and a verbose flag, and returns a promise that resolves to the
  * body of the response.
@@ -26,8 +20,8 @@ function get(url, headers = {}, verbose = false) {
             gzip: true
         };
         if (verbose) {
-            log("Requesting: " + url, "info");
-            log("Headers: " + JSON.stringify(headers), "info");
+            logger.info("Requesting: " + url);
+            logger.info("Headers: " + JSON.stringify(headers));
 
         }
 
@@ -57,9 +51,9 @@ function post(url, headers = {}, body = "", verbose = false) {
     return new Promise(function (resolve, reject) {
         var request = require('request');
         if (verbose) {
-            log("Posting: " + url, "info");
-            log("Headers: " + JSON.stringify(headers), "info");
-            log("Body: " + JSON.stringify(body), "info");
+            logger.info("Posting: " + url);
+            logger.info("Headers: " + JSON.stringify(headers));
+            logger.info("Body: " + JSON.stringify(body));
 
         }
         request.post({
@@ -77,47 +71,10 @@ function post(url, headers = {}, body = "", verbose = false) {
 
     });
 }
-/**
- * It logs a message to the console with a timestamp and a type
- * @param msg - The message to be logged
- * @param type - The type of log message. This can be "error", "info", or "success".
- */
-function log(msg, type = 'success') {
 
-    var time = new Date().toLocaleTimeString().replace('AM', '').replace('PM', '');
-    time.replace('^[ \t]+')
-    if (type == "error") {
-        console.log(("[ERROR] " + time + " | " + msg).red);
-    } else if (type == "info") {
-        console.log(("[INFO] " + time + " | " + msg).yellow);
-    }
-    else if (type == "success") {
-        console.log(("[LOG] " + time + " | " + msg).green);
-    }
-}
-function logadv(msg, color = 'green', text = 'LOG') {
-    var time = new Date().toLocaleTimeString();
-    switch (color) {
-        case 'green':
-            console.log(("[" + text + "] " + time + " | " + msg).green);
-            break;
-        case 'red':
-            console.log(("[" + text + "] " + time + " | " + msg).red);
-            break;
-        case 'yellow':
-            console.log(("[" + text + "] " + time + " | " + msg).yellow);
-            break;
-        case 'blue':
-            console.log(("[" + text + "] " + time + " | " + msg).blue);
-            break;
-        case 'cyan':
-            console.log(("[" + text + "] " + time + " | " + msg).cyan);
-            break;
-    }
-}
 function pi(digits) {
     let i = 1n;
-    let x = 3n * (10n ** 10020n);
+    let x = 3n * (BigInt(digits)  ** 10020n);
     let pi = x;
     while (x > 0) {
         x = x * i / ((i + 1n) * 4n);
@@ -130,6 +87,12 @@ function pi(digits) {
     final = final.substring(0, digits);
     return final
 }
+
+/**
+ * It prints out the text in the console.
+ * @param text - The text you want to type out.
+ * @param [speed=1] - The speed at which the text is typed. The default is 1.
+ */
 function typew(text, speed=1) {
     var i = 0;
     var timer = setInterval(function () {
@@ -139,14 +102,30 @@ function typew(text, speed=1) {
             clearInterval(timer);
         } 
     },  speed);
+    console.log()
+}
+
+class logger {
+
+    info(text) {
+        console.log(`[INFO] | ${moment().format('hh:mm:ss')} | ${text} |`.green);
+    }
+    warn(text) {
+        console.log(`[WARN] | ${moment().format('hh:mm:ss')} | ${text} |`.yellow);
+    }
+    error(text) {
+        console.log(`[ERROR] | ${moment().format('hh:mm:ss')} | ${text} |`.red);
+    }
+    debug(text) {
+        console.log(`[DEBUG] | ${moment().format('hh:mm:ss')} | ${text} |`.blue);
+    }
+
 }
 
 module.exports = {
-    log,
     get,
-    hello,
     post,
-    logadv,
     pi,
-    typew
+    typew,
+    logger
 }
