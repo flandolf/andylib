@@ -1,6 +1,6 @@
 require('colors')
 const logger = require('./logger');
-const moment = require('moment');
+
 /**
  * It takes a URL, a set of headers, and a verbose flag, and returns a promise that resolves to the
  * body of the response.
