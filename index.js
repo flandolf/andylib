@@ -47,7 +47,7 @@ function get(url, headers = {}, verbose = false) {
  * @param [verbose=false] - If true, will log the request to the console.
  * @returns A promise
  */
-function post(url, headers = {}, body = "", verbose = false) {
+function post(url, headers = {}, body = {}, verbose = false) {
     body = body.toString()
     return new Promise(function (resolve, reject) {
         var request = require('request');
@@ -55,7 +55,6 @@ function post(url, headers = {}, body = "", verbose = false) {
             logger.info("Posting: " + url);
             logger.info("Headers: " + JSON.stringify(headers));
             logger.info("Body: " + JSON.stringify(body));
-
         }
         request.post({
             url: url,
@@ -105,6 +104,8 @@ function typew(text, speed=1) {
     },  speed);
     
 }
+
+
 
 
 module.exports = {

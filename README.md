@@ -7,6 +7,7 @@ This library contains some functions to assist you in JS development.
 - [x] POST command
 - [x] LOG command
 - [x] PI command
+- [x] TIME command 
 - Many more soon to come...   
 ## Installation
 ### Using npm

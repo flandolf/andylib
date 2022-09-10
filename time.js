@@ -1,74 +1,50 @@
+const moment = require('moment');
 class time {
+    constructor() {
+        this.now = moment();
+    }
     until(day, month, year) {
-        const now = new Date();
-        const target = new Date(year, month - 1, day);
-        const diff = target - now;
-        const years = Math.floor(diff / (1000 * 60 * 60 * 24 * 365));
-        const months = Math.floor((diff - years * 1000 * 60 * 60 * 24 * 365) / (1000 * 60 * 60 * 24 * 30));
-        const days = Math.floor((diff - years * 1000 * 60 * 60 * 24 * 365 - months * 1000 * 60 * 60 * 24 * 30) / (1000 * 60 * 60 * 24));
-        const hours = Math.floor((diff - years * 1000 * 60 * 60 * 24 * 365 - months * 1000 * 60 * 60 * 24 * 30 - days * 1000 * 60 * 60 * 24) / (1000 * 60 * 60));
-        const minutes = Math.floor((diff - years * 1000 * 60 * 60 * 24 * 365 - months * 1000 * 60 * 60 * 24 * 30 - days * 1000 * 60 * 60 * 24 - hours * 1000 * 60 * 60) / (1000 * 60));
-        const seconds = Math.floor((diff - years * 1000 * 60 * 60 * 24 * 365 - months * 1000 * 60 * 60 * 24 * 30 - days * 1000 * 60 * 60 * 24 - hours * 1000 * 60 * 60 - minutes * 1000 * 60) / 1000);
+        const until = moment(`${year}-${month}-${day}`, 'YYYY-MM-DD');
+        const duration = moment.duration(until.diff(this.now));
         return {
-            years,
-            months,
-            days,
-            hours,
-            minutes,
-            seconds
+            years: duration.years(),
+            months: duration.months(),
+            days: duration.days(),
+            hours: duration.hours(),
+            minutes: duration.minutes(),
+            seconds: duration.seconds()
         };
     }
-    all(day, month, year) {
-        const target = new Date(`${year}-${month}-${day}`);
-        const seconds = this.secondsUntil(target);
-        const minutes = this.minutesUntil(target);
-        const hours = this.hoursUntil(target);
-        const days = this.daysUntil(target);
-        const months = this.monthsUntil(target);
-        const years = this.yearsUntil(target);
-        return {
-            years,
-            months,
-            days,
-            hours,
-            minutes,
-            seconds,
-        }
+    yearsUntil(day, month, year) {
+        const until = moment(`${year}-${month}-${day}`, 'YYYY-MM-DD');
+        const duration = moment.duration(until.diff(this.now));
+        return duration.years();
     }
-    secondsUntil(date) {
-        const now = new Date();
-        const diff = date.getTime() - now.getTime();
-        return Math.floor(diff / 1000);
+    monthsUntil(day, month, year) {
+        const until = moment(`${year}-${month}-${day}`, 'YYYY-MM-DD');
+        const duration = moment.duration(until.diff(this.now));
+        return duration.months();
     }
-
-    monthsUntil(date) {
-        const now = new Date();
-        const diff = date.getTime() - now.getTime();
-        return Math.floor(diff / (1000 * 60 * 60 * 24 * 30));
+    daysUntil(day, month, year) {
+        const until = moment(`${year}-${month}-${day}`, 'YYYY-MM-DD');
+        const duration = moment.duration(until.diff(this.now));
+        return duration.days();
     }
-
-    minutesUntil(date) {
-        const now = new Date();
-        const diff = date.getTime() - now.getTime();
-        return Math.floor(diff / (1000 * 60));
+    hoursUntil(day, month, year) {
+        const until = moment(`${year}-${month}-${day}`, 'YYYY-MM-DD');
+        const duration = moment.duration(until.diff(this.now));
+        return duration.hours();
+    }
+    minutesUntil(day, month, year) {
+        const until = moment(`${year}-${month}-${day}`, 'YYYY-MM-DD');
+        const duration = moment.duration(until.diff(this.now));
+        return duration.minutes();
+    }
+    secondsUntil(day, month, year) {
+        const until = moment(`${year}-${month}-${day}`, 'YYYY-MM-DD');
+        const duration = moment.duration(until.diff(this.now));
+        return duration.seconds();
     }
 
-    hoursUntil(date) {
-        const now = new Date();
-        const diff = date.getTime() - now.getTime();
-        return Math.floor(diff / (1000 * 60 * 60));
-    }
-
-    yearsUntil(date) {
-        const now = new Date();
-        const diff = date.getTime() - now.getTime();
-        return Math.floor(diff / (1000 * 60 * 60 * 24 * 365));
-    }
-
-    daysUntil(date) {
-        const now = new Date();
-        const diff = date.getTime() - now.getTime();
-        return Math.floor(diff / (1000 * 60 * 60 * 24));
-    }
 }
 module.exports = time;
